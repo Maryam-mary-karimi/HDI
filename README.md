@@ -11,11 +11,11 @@ Here are the Ports used in DeviceInfo files:
 
 3 servers with IP and port for pgw and dgw:
 
-HRM, localhost, 4001
+	HRM, localhost, 4001
 
-activity_tracker, localhost, 4002
+	activity_tracker, localhost, 4002
 
-calorimeter, localhost, 4003
+	calorimeter, localhost, 4003
 
 
 
