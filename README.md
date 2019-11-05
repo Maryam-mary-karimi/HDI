@@ -1,9 +1,10 @@
 # HDI
 Hierarchical Data Integrity Verification
 
+Each Folder has a DeviceInfo.txt file that specified IP and port
+In each "DeviceInfo.txt" file change "localhost" to the corresponding devices' IP
 
-in each "DeviceInfo.txt" file change local host to your devices' IP
-
+Here are the Ports used in DeviceInfo files:
 
 3 servers with IP and port for pgw and dgw:
  HRM, localhost, 4001
