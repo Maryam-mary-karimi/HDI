@@ -1,0 +1,13 @@
+12
+Date : 4/1/2016 , Device: calorimeter , Data : { Calories : 2645 }
+Date : 4/10/2016 , Device: calorimeter , Data : { Calories : 2458 }
+Date : 4/11/2016 , Device: calorimeter , Data : { Calories : 2568 }
+Date : 4/12/2016 , Device: calorimeter , Data : { Calories : 1140 }
+Date : 4/2/2017 , Device: calorimeter , Data : { Calories : 2040 }
+Date : 4/3/2017 , Device: calorimeter , Data : { Calories : 2395 }
+Date : 4/4/2017 , Device: calorimeter , Data : { Calories : 2581 }
+Date : 4/5/2017 , Device: calorimeter , Data : { Calories : 2735 }
+Date : 4/6/2018 , Device: calorimeter , Data : { Calories : 2733 }
+Date : 4/7/2018 , Device: calorimeter , Data : { Calories : 3021 }
+Date : 4/8/2018 , Device: calorimeter , Data : { Calories : 2577 }
+Date : 4/9/2018 , Device: calorimeter , Data : { Calories : 2811 }

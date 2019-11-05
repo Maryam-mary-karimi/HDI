@@ -1,0 +1,13 @@
+12
+Date : 4/1/2016 , Device: HRM ,  Data : { Heart Rate : 88.56391585760518 }
+Date : 4/10/2016 , Device: HRM ,  Data : { Heart Rate : 80.38854396154616 }
+Date : 4/11/2016 , Device: HRM ,  Data : { Heart Rate : 81.60631834750912 }
+Date : 4/12/2016 , Device: HRM ,  Data : { Heart Rate : 82.54147615937296 }
+Date : 4/2/2017 , Device: HRM ,  Data : { Heart Rate : 72.0686845168801 }
+Date : 4/3/2017 , Device: HRM ,  Data : { Heart Rate : 74.3982317893523 }
+Date : 4/4/2017 , Device: HRM ,  Data : { Heart Rate : 78.29537214757944 }
+Date : 4/5/2017 , Device: HRM ,  Data : { Heart Rate : 83.47432808155699 }
+Date : 4/6/2018 , Device: HRM ,  Data : { Heart Rate : 82.72365038560412 }
+Date : 4/7/2018 , Device: HRM ,  Data : { Heart Rate : 90.8515057113188 }
+Date : 4/8/2018 , Device: HRM ,  Data : { Heart Rate : 81.79427842565597 }
+Date : 4/9/2018 , Device: HRM ,  Data : { Heart Rate : 84.24339685723838 }
