@@ -27,12 +27,9 @@ Here are the Ports used in DeviceInfo files:
 
 	pgw for dgw:localhost 3000
 
-	dgw for pgw: localhost 2001
+	dgw for pgw:localhost 2001
 
+Notice: pgw is Patient's gateway and dgw is Doctor's gateway
 
+Assuming 365 data blocks for a year (each day one block), the optimum size for generalized bloom filter to keep false positive less than 1% is 10700 and temporary bloom filter can be as small as 20 bits. 
 
-bloom filter size= 10700
-
-estimated data blocks in bloom filter 365
-
-temp bloom filter size = 20
