@@ -1,6 +1,10 @@
 # HDI
 Hierarchical Data Integrity Verification
 
+Personal health tracking devices are increasingly replacing expensive health monitoring of patients. Patients can eventually own their medical data, collected from personal health monitoring devices and other resources, store them in variety of cloud services, and make them available to medical service providers of their choice. In such cases, patients will be responsible for ensuring the integrity of retrieved data, from multiple points, whenever doctors need to access these data to provide appropriate medical services. We present a Hierarchical Data Integrity (HDI) approach to verify if the data, sent by health monitoring devices to the cloud, remain unchanged. It is hierarchical as follows: there is a quick verification of the integrity of recent health data (in less than $1 ms$), followed if necessary by a low overhead secure option for verifying the integrity of both recent and historical data (still only in $26.04 ms$). Further, the hierarchy allows granular identification of data units that fail integrity checks. While we do not consider security attacks in detail, it is possible for a patient to periodically (randomly) use the secure process to verify the integrity of data. This reduces the computation, storage, and time of integrity verification as shown by analysis, simulation, and a simple hardware implementation.
+
+The scenario is that the patinet gateway receive data from multiple wearable devices, create some meta data and store the data in the server. Later, when the doctor wants to retrive the data doctors gateway negotiate with patient gate way to verify that the data is has not been changed. It has 3 programs that can be run on 3 devices, including server (consists of 3 virtual servers), patient's gateway and doctor's gateway.   
+
 
 Each Folder has a DeviceInfo.txt file that specified IP and port
 
