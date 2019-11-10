@@ -15,7 +15,7 @@
 
 
 import java.io.FileWriter;
-import java.io.IOException;
+//import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -272,15 +272,15 @@ public class BloomFilter<E> implements Serializable {
 			// (1 - e^(-k * n / m)) ^ k
 			double fp=Math.pow((1 - Math.exp(-k * (double) numberOfElements
 					/ (double) bitSetSize)), k);
-			if(DGW_Main.iflog)System.out.println("n: "+numberOfElements+", m: "+ bitSetSize+" , isGBF: "+ isGBF);
-			if(DGW_Main.iflog)System.out.println(" fp: "+fp +"\n");
+			////if(DGW_Main.iflog)System.out.println("n: "+numberOfElements+", m: "+ bitSetSize+" , isGBF: "+ isGBF);
+			//if(DGW_Main.iflog)System.out.println(" fp: "+fp +"\n");
 
-			try {
-				fw.write("n: "+numberOfElements+", m: "+ bitSetSize+" , K:"+ k +" , isGBF: "+ isGBF+"\n");
-				fw.write(" fp: "+fp +"\n \n");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//try {
+				//fw.write("n: "+numberOfElements+", m: "+ bitSetSize+" , K:"+ k +" , isGBF: "+ isGBF+"\n");
+				//fw.write(" fp: "+fp +"\n \n");
+			//} catch (IOException e) {
+			//	e.printStackTrace();
+			//}
 			return fp;
 		}
 		else{// for GBF
@@ -313,15 +313,15 @@ public class BloomFilter<E> implements Serializable {
 
 			double ifnotGBFfp= Math.pow((1 - Math.exp(-k * (double) numberOfElements/ (double) bitSetSize)), k);
 
-			if(DGW_Main.iflog)System.out.println("n: "+numberOfElements+", m: "+ bitSetSize+" , isGBF: "+ isGBF);
-			if(DGW_Main.iflog)System.out.println("k0: "+k0+" , k1: "+k1+"\n q0: "+q0+" , q1: "+q1+" \n pn: "+pn+" \n b0: "+b0+ " , b1: "+b1+"\n fp: "+fp +"\n fp':"+ ifnotGBFfp );
+			//if(DGW_Main.iflog)System.out.println("n: "+numberOfElements+", m: "+ bitSetSize+" , isGBF: "+ isGBF);
+			//if(DGW_Main.iflog)System.out.println("k0: "+k0+" , k1: "+k1+"\n q0: "+q0+" , q1: "+q1+" \n pn: "+pn+" \n b0: "+b0+ " , b1: "+b1+"\n fp: "+fp +"\n fp':"+ ifnotGBFfp );
 
-			try {
-				fw.write("n: "+numberOfElements+", m: "+ bitSetSize+" , K:"+ k +" , isGBF: "+ isGBF+"\n");
-				fw.write("k0: "+k0+" , k1: "+k1+"\n q0: "+q0+" , q1: "+q1+" \n pn: "+pn+" \n b0: "+b0+ " , b1: "+b1+"\n fp: "+fp+"\n fp':"+ ifnotGBFfp +"\n \n");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//try {
+			//	fw.write("n: "+numberOfElements+", m: "+ bitSetSize+" , K:"+ k +" , isGBF: "+ isGBF+"\n");
+			//	fw.write("k0: "+k0+" , k1: "+k1+"\n q0: "+q0+" , q1: "+q1+" \n pn: "+pn+" \n b0: "+b0+ " , b1: "+b1+"\n fp: "+fp+"\n fp':"+ ifnotGBFfp +"\n \n");
+			//} catch (IOException e) {
+			//	e.printStackTrace();
+			//}
 
 			return fp;
 		}
@@ -364,15 +364,15 @@ public class BloomFilter<E> implements Serializable {
 			double fn=temp_f_i/numberOfElements;
 			//Fp= (pn ^ b0)* (( 1- pn)^ b1)
 
-			if(DGW_Main.iflog)System.out.println("n: "+numberOfElements+", m: "+ bitSetSize+" , isGBF: "+ isGBF);
-			if(DGW_Main.iflog)System.out.println("k0: "+k0+" , k1: "+k1+"\n q0: "+q0+" , q1: "+q1+" \n b0: "+b0+ " , b1: "+b1+"\n fn: "+fn );
+			//if(DGW_Main.iflog)System.out.println("n: "+numberOfElements+", m: "+ bitSetSize+" , isGBF: "+ isGBF);
+			//if(DGW_Main.iflog)System.out.println("k0: "+k0+" , k1: "+k1+"\n q0: "+q0+" , q1: "+q1+" \n b0: "+b0+ " , b1: "+b1+"\n fn: "+fn );
 
-			try {
-				fw.write("n: "+numberOfElements+", m: "+ bitSetSize+" , K:"+ k +" , isGBF: "+ isGBF+"\n");
-				fw.write("k0: "+k0+" , k1: "+k1+"\n q0: "+q0+" , q1: "+q1+" \n b0: "+b0+ " , b1: "+b1+"\n fn: "+fn+"\n \n");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//try {
+			//	fw.write("n: "+numberOfElements+", m: "+ bitSetSize+" , K:"+ k +" , isGBF: "+ isGBF+"\n");
+			//	fw.write("k0: "+k0+" , k1: "+k1+"\n q0: "+q0+" , q1: "+q1+" \n b0: "+b0+ " , b1: "+b1+"\n fn: "+fn+"\n \n");
+			///} catch (IOException e) {
+			//	e.printStackTrace();
+			//}
 
 			return fn;
 		}
@@ -588,7 +588,7 @@ public class BloomFilter<E> implements Serializable {
 	}
 
 
-	public String StringOfBits(FileWriter fw){
+	public String StringOfBits(){
 
 		StringBuilder s = new StringBuilder();
 		for( int i = 0; i < this.bitset.length();  i++ )
@@ -596,12 +596,12 @@ public class BloomFilter<E> implements Serializable {
 			s.append( this.bitset.get( i ) == true ? 1: 0 );
 		}
 
-		if(DGW_Main.iflog)System.out.println( s );
-		try {
-			fw.write(s+"\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		//if(DGW_Main.iflog)System.out.println( s );
+		//try {
+		//	fw.write(s+"\n");
+		//} catch (IOException e) {
+		//	e.printStackTrace();
+		//}
 
 		return s.toString();
 	}
