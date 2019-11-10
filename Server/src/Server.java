@@ -1,6 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+//import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -71,18 +71,18 @@ public class Server extends Thread{
 				if(m.getType().equals("data")) {
 					storeData(m);
 					returnMessage= new Message("ack", true);
-					System.out.println("stored data successfully through port:"+ port);
+					//System.out.println("stored data successfully through port:"+ port);
 					sendToDsocket=new Socket(pgwIP,pgwPort);
 				}
 				else if(m.getType().equals("req")) {					
-					returnMessage= replytoQuery(m, Server_Main.serverfw);
-					System.out.println("request data successfully through port:"+ port);
+					returnMessage= replytoQuery(m);
+					//System.out.println("request data successfully through port:"+ port);
 					sendToDsocket=new Socket(doctorsIP,doctorPort);
 				}
 				ObjectOutputStream os = new ObjectOutputStream(sendToDsocket.getOutputStream());
 				os.writeObject(returnMessage);
-				System.out.print("sent message to the port "+sendToDsocket.getPort()+" :");
-				returnMessage.print();
+				//System.out.print("sent message to the port "+sendToDsocket.getPort()+" :");
+				//returnMessage.print();
 				sendToDsocket.close();
 			}
 		} catch (IOException | ClassNotFoundException e) {
@@ -92,26 +92,26 @@ public class Server extends Thread{
 	}
 
 
-	private Message replytoQuery(Message m, FileWriter fw) {
+	private Message replytoQuery(Message m) {
 
-		Vector<Vector<DataNode>> requiredDataBlocksforBFandTree=replyToQueries(m.getQueries(),fw);
+		Vector<Vector<DataNode>> requiredDataBlocksforBFandTree=replyToQueries(m.getQueries());
 		m.setDataBlocks(requiredDataBlocksforBFandTree.elementAt(0));
 		m.setExtraDataBlocks(requiredDataBlocksforBFandTree.elementAt(1));
-		System.out.println(requiredDataBlocksforBFandTree.elementAt(0).size());
+		//System.out.println(requiredDataBlocksforBFandTree.elementAt(0).size());
 		if(m.getDataBlocks().size()==0){
 			System.out.println("data do not exists in the cloud");
-			try {
-				fw.write("data do not exists in the cloud"+"\n");
-			} catch (IOException e) {
+			//try {
+			//	fw.write("data do not exists in the cloud"+"\n");
+			//} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			//	e.printStackTrace();
+			//}
 		}
 		else{
 			m.setQueries(requiredDataBlocksforBFandTree.elementAt(0));
 
-			System.out.println("data exists in the cloud");
-			m.setRelatedDataNodesinTree(relatedPartOfTheTree(m.getQueries(),fw));
+			//System.out.println("data exists in the cloud");
+			m.setRelatedDataNodesinTree(relatedPartOfTheTree(m.getQueries()));
 		}
 		return m;
 
@@ -128,12 +128,12 @@ public class Server extends Thread{
 			int j = 0;
 			for (; j < this.datablocks.length; j++) {
 				temp[j] = this.datablocks[j];
-				System.out.println(temp[j].id);
+				//System.out.println(temp[j].id);
 			}
 			for (; j < temp.length; j++) {
-				System.out.println(datablocks[j-this.datablocks.length].id);
+				//System.out.println(datablocks[j-this.datablocks.length].id);
 				temp[j]= datablocks[j-this.datablocks.length];
-				System.out.println(temp[j].id);
+				//System.out.println(temp[j].id);
 
 			}
 			this.datablocks=temp;
@@ -158,19 +158,19 @@ public class Server extends Thread{
 
 	public Message sendToPGW(Message message, String IP, int port) throws UnknownHostException,
 	IOException, ClassNotFoundException {
-		System.out.println("welcome client to the "+ IP+" "+ port);
+		//System.out.println("welcome client to the "+ IP+" "+ port);
 		Socket spSocket = new Socket(IP, port);
-		System.out.println("Client connected");
+		//System.out.println("Client connected");
 		ObjectOutputStream os = new ObjectOutputStream(spSocket.getOutputStream());
-		message.print();
+		//message.print();
 		os.writeObject(message);
-		System.out.println("sent informations to the server with port "+ port);
+		//System.out.println("sent informations to the server with port "+ port);
 		spSocket.close();
 
 		Socket psSocket = ss.accept();
 		ObjectInputStream is = new ObjectInputStream(psSocket.getInputStream());
 		Message returnMessage = (Message) is.readObject();
-		returnMessage.print();
+		//returnMessage.print();
 		psSocket.close();
 		return returnMessage;
 	}
@@ -178,16 +178,16 @@ public class Server extends Thread{
 
 
 
-	public Vector<Vector<DataNode>> replyToQueries(Vector<DataNode> queries, FileWriter fw){
+	public Vector<Vector<DataNode>> replyToQueries(Vector<DataNode> queries){
 		Vector<DataNode> replyall=new Vector<>();
 		Vector<DataNode> replySpecific=new Vector<>();
-		boolean queriedDataExists=false;
+		//boolean queriedDataExists=false;
 
 		for (int i = 0; i < datablocks.length; i++) {
 			for (int j = 0; j < queries.size(); j++) {
 				if(datablocks[i].device.deviceName.equals(queries.elementAt(j).device.deviceName) &&
 						datablocks[i].date.year==queries.elementAt(j).date.year){
-					queriedDataExists=true;
+					//queriedDataExists=true;
 					if(!replyall.contains(datablocks[i]))
 						replyall.add(datablocks[i]);
 					if(datablocks[i].date.month==queries.elementAt(j).date.month) {
@@ -201,11 +201,11 @@ public class Server extends Thread{
 			replySpecific=replyall;
 
 		}
-		try {
-			fw.write("exists "+queriedDataExists+"\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		//try {
+		//	fw.write("exists "+queriedDataExists+"\n");
+		//} catch (IOException e) {
+		//	e.printStackTrace();
+		//}
 
 
 		Vector<Vector<DataNode>> output=new Vector<>();
@@ -214,18 +214,18 @@ public class Server extends Thread{
 		return output;
 	}
 
-	public Vector<DataNode> relatedPartOfTheTree(Vector<DataNode> queries,FileWriter fw){
+	public Vector<DataNode> relatedPartOfTheTree(Vector<DataNode> queries){
 		//find related nodes
 		Vector<DataNode> relatedNodes=new Vector<>();
 		Vector<DataNode> notvisitedParts=new Vector<>();
 
-		try {
-			fw.write("SendTheRelatedPartOfTheTree"+"\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		//try {
+		//	fw.write("SendTheRelatedPartOfTheTree"+"\n");
+		//} catch (IOException e) {
+		//	e.printStackTrace();
+		//}
 		notvisitedParts.add(tree.root);
-		System.out.println("RelatedPartOfTheTree");
+		//System.out.println("RelatedPartOfTheTree");
 
 		while(!notvisitedParts.isEmpty()){
 			DataNode visitingNode=notvisitedParts.remove(0);
@@ -238,7 +238,7 @@ public class Server extends Thread{
 						//&& visitingNode.date.year==queries.elementAt(i).date.year)
 						){
 					if(!relatedNodes.contains(visitingNode)) {
-						System.out.print("visiting: ");visitingNode.print(fw);
+						//System.out.print("visiting: ");visitingNode.print(fw);
 						relatedNodes.add(visitingNode);
 						for(int j=0; j<visitingNode.numOfchildren;j++){
 							notvisitedParts.addElement(visitingNode.children[j]);
