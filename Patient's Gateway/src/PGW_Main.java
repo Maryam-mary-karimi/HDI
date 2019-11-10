@@ -12,7 +12,7 @@ public class PGW_Main {
 
 	Patient peter;
 	P_GW patientGW;
-	static FileWriter fw;
+	static String allPrints="";
 	
 	Vector <Socket> cloudsAddress;
 
@@ -26,7 +26,7 @@ public class PGW_Main {
 		try {
 			
 			
-			fw=new FileWriter(new File("res365.txt"),true);
+			
 
 			long time1s= System.currentTimeMillis(); 
 
@@ -37,16 +37,22 @@ public class PGW_Main {
 
 			long time2s= System.currentTimeMillis(); 
 
-			//if(iflog)System.out.println("required time to store "+(time2s-time1s)+" ms ");
-			fw.write("required time to store "+(time2s-time1s)+" ms \n");
+			System.out.println("required time to store "+(time2s-time1s)+" ms ");
+			allPrints=allPrints+("required time to store "+(time2s-time1s)+" ms \n");
 
+			
+			FileWriter fw=new FileWriter(new File("res365.txt"),true);
+			fw.write(allPrints);
+			allPrints="";
+			fw.flush();
+			fw.close();
+			
+			
 			new ListenToTheDoctor(iot.patientGW).start();//listen to the doctor
 			
 			new Update(iot.patientGW, tmpBfSize).start();
 			
-			 
-			fw.flush();
-			//fw.close();
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,7 +80,7 @@ public class PGW_Main {
 					temp[j] = alldataset[j];
 				}
 				for (; j < temp.length; j++) {
-					System.out.println(newdata[j-alldataset.length].id);
+					//System.out.println(newdata[j-alldataset.length].id);
 					temp[j]= newdata[j-alldataset.length];
 				}
 				alldataset=temp;
@@ -82,7 +88,7 @@ public class PGW_Main {
 			
 
 			//////////////////// P GateWay //////////////////////////////
-			patientGW.addDataToBloomFilter(alldataset,fw, tmpBfSize);
+			patientGW.addDataToBloomFilter(alldataset, tmpBfSize);
 			
 			
 			//if(iflog)System.out.println("build tree");
@@ -91,7 +97,7 @@ public class PGW_Main {
 				leaves[i]=new DataNode(alldataset[i].id, alldataset[i].date, alldataset[i].device, alldataset[i].value);
 			}
 			Tree tree=patientGW.buildTheTree(leaves);
-			tree.PrintTree(fw);
+			//tree.PrintTree(fw);
 
 			///////////////// cloud //////////////////
 		
@@ -99,14 +105,14 @@ public class PGW_Main {
 			//send blocks and tree to server//////////////////////////////
 			for (int i = 0; i < patientGW.devices.length; i++) {
 				Message dataMessage= new Message("data", patientGW.devices[i].dataToSend,tree);
-				for (int j = 0; j < patientGW.devices[i].dataToSend.length; j++) {
-					System.out.println(patientGW.devices[i].dataToSend[j].id+" "+patientGW.devices[i].dataToSend[j].date.year+" "+patientGW.devices[i].dataToSend[j].device.deviceName+" "+patientGW.devices[i].dataToSend[j].value+" "+patientGW.devices[i].dataToSend[j].level);
-				}
+				//for (int j = 0; j < patientGW.devices[i].dataToSend.length; j++) {
+				//	System.out.println(patientGW.devices[i].dataToSend[j].id+" "+patientGW.devices[i].dataToSend[j].date.year+" "+patientGW.devices[i].dataToSend[j].device.deviceName+" "+patientGW.devices[i].dataToSend[j].value+" "+patientGW.devices[i].dataToSend[j].level);
+				//}
 				SendToServer(dataMessage,patientGW.devices[i].cloudIP,patientGW.devices[i].cloudport);
 			}
 			
 			
-			System.out.println("Data sent");
+			//System.out.println("Data sent");
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -118,29 +124,29 @@ public class PGW_Main {
 
 	public static Message SendToServer(Message message, String IP, int port) throws UnknownHostException,
 	IOException, ClassNotFoundException {
-		System.out.println("welcome client to the "+ IP+" "+ port);
+		//System.out.println("welcome client to the "+ IP+" "+ port);
 		Socket psSocket = new Socket(IP, port);
-		System.out.println("Client connected");
+		//System.out.println("Client connected");
 		ObjectOutputStream os = new ObjectOutputStream(psSocket.getOutputStream());
 		//message.print();
 		
-		System.out.print("message: "+ message.getType()+", size: "+message.size);
-		if(message.getType().equals("data")) {
-			for (int i = 0; i < message.getDataNodes().length; i++) {
-				System.out.println(message.getDataNodes()[i].id+" "+message.getDataNodes()[i].date.year+" "+message.getDataNodes()[i].device.deviceName+" "+message.getDataNodes()[i].value+" "+message.getDataNodes()[i].level);
-			}
-		}
+		//System.out.print("message: "+ message.getType()+", size: "+message.size);
+		//if(message.getType().equals("data")) {
+		//	for (int i = 0; i < message.getDataNodes().length; i++) {
+		//		System.out.println(message.getDataNodes()[i].id+" "+message.getDataNodes()[i].date.year+" "+message.getDataNodes()[i].device.deviceName+" "+message.getDataNodes()[i].value+" "+message.getDataNodes()[i].level);
+		//	}
+		//}
 		
 		
 		os.writeObject(message);
-		System.out.println("sent informations to the server with port "+ port);
+		//System.out.println("sent informations to the server with port "+ port);
 		psSocket.close();
 
 		ServerSocket sp = new ServerSocket(port-1000);
 		Socket spSocket = sp.accept();
 		ObjectInputStream is = new ObjectInputStream(spSocket.getInputStream());
 		Message returnMessage = (Message) is.readObject();
-		returnMessage.print();
+		//returnMessage.print();
 		spSocket.close();
 		sp.close();
 		return returnMessage;

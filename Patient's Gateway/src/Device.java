@@ -36,12 +36,12 @@ public class Device implements Serializable {
 		double month=Math.random()*11+1;
 		double day=Math.random()*30+1;
 		DataNode n=new DataNode(id+"", new Date((int)year, (int) month,(int)day), this, s);
-		try {
+		//try {
 			//if(PGW_Main.iflog)System.out.println("createRandomDataPacket "+n.value);
-			fw.write("createRandomDataPacket "+n.value+"\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			//fw.write("createRandomDataPacket "+n.value+"\n");
+		//} catch (IOException e) {
+		//	e.printStackTrace();
+		//}
 		return n;
 	}
 
@@ -59,7 +59,7 @@ public class Device implements Serializable {
 			while(sc.hasNext()) {
 				String temp=sc.nextLine();
 				
-				System.out.println("Date"+temp.substring(temp.indexOf("Date")+7, temp.indexOf(" ,") ) );
+				//System.out.println("Date"+temp.substring(temp.indexOf("Date")+7, temp.indexOf(" ,") ) );
 				
 				String date[] = temp.substring(temp.indexOf("Date")+7, temp.indexOf(" ,") ).split("/");
 
@@ -68,7 +68,7 @@ public class Device implements Serializable {
 				int day=Integer.parseInt(date[0]);
 
 				String data=temp.substring(temp.indexOf("Data : ")+7);
-				System.out.println(data);
+				//System.out.println(data);
 				DataNode n=new DataNode(numberOfReceivedPackets+"", new Date(year, month,day), this, data);
 				numberOfReceivedPackets++;
 				dataToSend[i++]=n;

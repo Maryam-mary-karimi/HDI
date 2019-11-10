@@ -35,8 +35,8 @@ class DataNode implements Serializable {
 	} 
 
 	boolean isEqualto(DataNode datanode){
-		System.out.println("node1: "+this.id+" "+this.date.year+" "+this.device.deviceName+" "+this.value);
-		System.out.println("node2: "+datanode.id+" "+datanode.date.year+" "+datanode.device.deviceName+" "+datanode.value);
+		//System.out.println("node1: "+this.id+" "+this.date.year+" "+this.device.deviceName+" "+this.value);
+		//System.out.println("node2: "+datanode.id+" "+datanode.date.year+" "+datanode.device.deviceName+" "+datanode.value);
 
 		if(this.device.deviceName.equals(datanode.device.deviceName)
 				&& this.date.year==datanode.date.year && this.date.month==datanode.date.month && this.date.day==datanode.date.day
@@ -48,8 +48,8 @@ class DataNode implements Serializable {
 	}
 	
 	boolean isEqualForRebuildedTree(DataNode datanode){
-		System.out.println("node1: "+this.id+" "+this.date.year+" "+this.device.deviceName+" "+this.value);
-		System.out.println("node2: "+datanode.id+" "+datanode.date.year+" "+datanode.device.deviceName+" "+datanode.value);
+		//System.out.println("node1: "+this.id+" "+this.date.year+" "+this.device.deviceName+" "+this.value);
+		//System.out.println("node2: "+datanode.id+" "+datanode.date.year+" "+datanode.device.deviceName+" "+datanode.value);
 		
 		if(this.device.deviceName.equals(datanode.device.deviceName)
 				&& this.value.equals(datanode.value)){

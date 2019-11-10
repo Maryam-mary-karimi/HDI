@@ -589,7 +589,7 @@ public class BloomFilter<E> implements Serializable {
 	}
 
 
-	public String StringOfBits(FileWriter fw){
+	public String StringOfBits(){
 
 		StringBuilder s = new StringBuilder();
 		for( int i = 0; i < this.bitset.length();  i++ )
@@ -598,11 +598,11 @@ public class BloomFilter<E> implements Serializable {
 		}
 
 		//if(PGW_Main.iflog)System.out.println( s );
-		try {
-			fw.write(s+"\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		//try {
+		//	fw.write(s+"\n");
+		//} catch (IOException e) {
+		//	e.printStackTrace();
+		//}
 
 		return s.toString();
 	}

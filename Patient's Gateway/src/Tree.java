@@ -64,7 +64,7 @@ public class Tree implements Serializable{
 		String s = HexUtils.getHex(node.value.getBytes());
 		Keccak keccak = new Keccak();
 		node.value =keccak.getHash(s, Parameters.SHA3_512);
-		System.out.print("nodeSHA:"); node.print(PGW_Main.fw);
+		//System.out.print("nodeSHA:"); node.print(PGW_Main.fw);
 		node.level=4;
 		numOfNodes++;
 	}
@@ -128,7 +128,7 @@ public class Tree implements Serializable{
 		}
 		n.level=level;
 		
-		System.out.print("HMAC value:"); n.print(PGW_Main.fw);
+		//System.out.print("HMAC value:"); n.print(PGW_Main.fw);
 		return n;
 	}
 
