@@ -37,3 +37,7 @@ Notice: pgw is Patient's gateway and dgw is Doctor's gateway
 
 Assuming 365 data blocks for a year (each day one block), the optimum size for generalized bloom filter, to keep false positive less than 1%, is 10700 bits and temporary bloom filter can be as small as 20 bits. 
 
+
+# Matlab
+The Matlab folder contains files used for calculationg false positive and negative in GBF and BF.
+
