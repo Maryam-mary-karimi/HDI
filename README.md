@@ -41,5 +41,5 @@ Assuming 365 data blocks for a year (each day one block), the optimum size for g
 # Matlab
 The Matlab folder contains files used for calculationg false positive and negative in GBF and BF using the formulats in [1].
 
-[1]Laufer, Rafael P., Pedro B. Velloso, and Otto Carlos MB Duarte. "A generalized bloom filter to secure distributed network applications." Computer Networks 55, no. 8 (2011): 1804-1819.
+[1] Laufer, Rafael P., Pedro B. Velloso, and Otto Carlos MB Duarte. "A generalized bloom filter to secure distributed network applications." Computer Networks 55, no. 8 (2011): 1804-1819.
 
